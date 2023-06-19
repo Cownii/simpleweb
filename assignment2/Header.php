@@ -53,9 +53,16 @@
                                     Management 
                                 </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="Allproduct.php"> All Product </a>
+                                        <a class="dropdown-item" href="Allproduct.php"> All toy </a>
                                         <a class="dropdown-item" href="Order.php"> Order </a>   
                                         <a class="dropdown-item" href="category_management.php"> Category management </a>
+                                        <?php
+                                            if(isset($_SESSION['user_name'])):
+                                        ?>
+                                        <a class="dropdown-item" href="add_product.php"> Add toy </a>
+                                        <?php   
+                                            endif;
+                                        ?>   
                                     </div>
                             </div>
 
