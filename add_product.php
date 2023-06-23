@@ -1,11 +1,12 @@
 <?php
-include_once 'Header.php';
 include_once 'ConnectMysql.php';
+include_once 'Header.php';
 
 if(isset($_POST['btnSubmit']))
 {
       $c = new Connect();
       $dblink = $c->connectToPDO();
+      $pID = $_POST['txtpID'];
       $pName = $_POST['txtpName'];
       $pPrice = $_POST['txtpPrice'];
       $pStatus = $_POST['txtpStatus'];
@@ -21,10 +22,10 @@ if(isset($_POST['btnSubmit']))
       $flag = move_uploaded_file($_FILES['Image']['tmp_name'],$storedPath.$Image);
 
       if($flag)
-      {
-        $sql = "INSERT INTO `product`(`pName`, `pPrice`, `pStatus`,
+    {
+        $sql = "INSERT INTO `product`(`pID`, `pName`, `pPrice`, `pStatus`,
          `pDescription`, `pImage`, `pQuantity`, `cat_id`, `store_ID`, `sup_id`)
-          VALUES (?,?,?,?,?,?,?,?,?)";
+          VALUES (?,?,?,?,?,?,?,?,?,?)";
         $re = $dblink->prepare($sql);
             
         $stmt = $re->execute(array("$pName","$pPrice","$pStatus","$pDescription","$Image","$quantity",
@@ -38,14 +39,20 @@ if(isset($_POST['btnSubmit']))
         {
             echo "Failed";
         }
-            }
-        }
+    }
+    }
 ?>
 
 <div id="main" class="container mt-4">     
     <form class="form form-vertical" method="POST" action="#"  enctype="multipart/form-data">
         <div class="form-body">
             <div class="row">
+            <div class="col-12">
+                    <div class="form-group">
+                        <label for="image-vertical">Toy ID </label>
+                        <input type="text" name="txtpID" id="txtpID" class="form-control" value="">
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="form-group">
                         <label for="image-vertical">Toy Name </label>
@@ -101,7 +108,7 @@ if(isset($_POST['btnSubmit']))
                     </div>
                 </div>
                 <div class="col-12 d-flex mt-3 justify-content-center">
-                    <button type="submit" class="btn btn-warning me-1 mb-1 rounded-pill" name="btnSubmit"> SUBMIT </button>
+                    <button type="submit" class="btn btn-warning me-1 mb-1 rounded-pill" name="btnSubmit"> Add </button>
                 </div>
             </div>
         </div>
