@@ -28,7 +28,7 @@ if(isset($_POST['btnSubmit']))
           VALUES (?,?,?,?,?,?,?,?,?,?)";
         $re = $dblink->prepare($sql);
             
-        $stmt = $re->execute(array("$pName","$pPrice","$pStatus","$pDescription","$Image","$quantity",
+        $stmt = $re->execute(array("$pID","$pName","$pPrice","$pStatus","$pDescription","$Image","$quantity",
                                     "$cat_id","$store_ID","$sup_id"));      
 
         if($stmt)
